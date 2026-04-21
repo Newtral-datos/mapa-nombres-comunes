@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="utf-8" />
+  <title>Nombres más comunes por municipio — España 2024</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <link href="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.css" rel="stylesheet" />
+  <script src="https://unpkg.com/maplibre-gl@3.6.2/dist/maplibre-gl.js"></script>
+  <script src="https://unpkg.com/pmtiles@3.0.6/dist/pmtiles.js"></script>
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <div id="map"></div>
+
+  <header id="header">
+    <div class="header-left">
+      <span class="header-title">Nombre más común por municipio</span>
+    </div>
+  </header>
+
+  <div id="search-container">
+    <div id="search-wrap">
+      <svg id="search-icon" viewBox="0 0 20 20" fill="none">
+        <circle cx="8.5" cy="8.5" r="5.5" stroke="currentColor" stroke-width="1.8"/>
+        <path d="M13 13l3.5 3.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"/>
+      </svg>
+      <input id="search-input" type="text" placeholder="Busca un nombre o municipio…" autocomplete="off" spellcheck="false" />
+      <button id="search-clear" class="hidden">
+        <svg viewBox="0 0 20 20" fill="none">
+          <path d="M5 5l10 10M15 5L5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </button>
+    </div>
+    <div id="search-dropdown" class="hidden"></div>
+  </div>
+
+  <div id="legend">
+    <div class="leg-header">
+      <div class="leg-title" id="leg-title">Top nombres</div>
+      <button id="leg-toggle-btn" class="leg-toggle">Activar colores</button>
+    </div>
+    <div id="leg-sex-toggle" class="leg-sex-toggle hidden">
+      <button class="pill-sex active" data-sex="h">Hombres</button>
+      <button class="pill-sex" data-sex="m">Mujeres</button>
+    </div>
+    <div id="leg-items"></div>
+    <div class="leg-nd">
+      <span class="leg-swatch" style="background:#aaaaaa"></span>
+      <span>Otros</span>
+    </div>
+    <div class="leg-nd">
+      <span class="leg-swatch" style="background:#d8d8d8"></span>
+      <span>Sin datos</span>
+    </div>
+  </div>
+
+  <div id="map-tooltip" class="map-tooltip"></div>
+
+  <script src="app.js"></script>
+</body>
+</html>
