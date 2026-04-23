@@ -138,7 +138,7 @@ body::-webkit-scrollbar { display: none; }
   color: var(--text);
   text-align: center;
 }
-#search-input:focus { text-align: left; }
+
 #search-input::placeholder { color: #9ca3af; }
 
 #search-clear {
@@ -249,6 +249,19 @@ body::-webkit-scrollbar { display: none; }
   text-transform: uppercase;
   letter-spacing: 0.07em;
   color: var(--muted);
+}
+
+.leg-mun-count {
+  display: inline-block;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: 0;
+  color: #000;
+  background: #01f3b3;
+  border-radius: 4px;
+  padding: 1px 6px;
+  margin-top: 3px;
 }
 
 .leg-toggle {

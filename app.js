@@ -82,7 +82,10 @@ function updateLegend() {
   if (searchName) {
     btn.style.display = 'none';
     sexToggle.classList.add('hidden');
-    title.textContent = toTitleCase(searchName);
+    const entryH = nombreIndex.H.find(x => x.n === searchName);
+    const entryM = nombreIndex.M.find(x => x.n === searchName);
+    const munCount = Math.max(entryH?.m ?? 0, entryM?.m ?? 0);
+    title.innerHTML = `${toTitleCase(searchName)}<br><span class="leg-mun-count">Top 5 en ${munCount.toLocaleString('es')} municipios</span>`;
     container.innerHTML = '';
     ndItems.forEach(el => el.style.display = 'none');
     const labels = ['1.º más común', '2.º más común', '3.º más común', '4.º más común', '5.º más común'];
@@ -212,7 +215,7 @@ function renderDropdown(q) {
       const inM  = nombreIndex.M.some(x => x.n === name);
       const badge = inH && inM ? 'H · M' : inH ? 'H' : 'M';
       return `<div class="dd-item" data-type="nombre" data-name="${name}">
-        <span class="dd-match">${highlightMatch(toTitleCase(name), q)}</span>
+        <span class="dd-match">${highlightMatch(name, q)}</span>
         <span class="dd-badge">${badge}</span>
       </div>`;
     }).join('');
@@ -222,7 +225,7 @@ function renderDropdown(q) {
     html += `<div class="dd-section">Municipios</div>`;
     html += muns.map(m => `
       <div class="dd-item" data-type="municipio" data-lat="${m.lat}" data-lng="${m.lng}" data-name="${m.n}">
-        <span class="dd-match">${highlightMatch(m.n, q)}</span>
+        <span class="dd-match">${highlightMatch(m.n.toUpperCase(), q)}</span>
         <span class="dd-prov">${m.p}</span>
       </div>`).join('');
   }
