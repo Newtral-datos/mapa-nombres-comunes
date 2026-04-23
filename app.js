@@ -371,14 +371,14 @@ map.on('load', async () => {
 
   map.on('mousemove', 'municipios-fill', e => {
     const p = e.features?.[0]?.properties;
-    if (!hasDatos(p)) {
+    if (!p || !p.municipio) {
       map.getCanvas().style.cursor = '';
       tooltip.classList.remove('visible');
       return;
     }
-    map.getCanvas().style.cursor = 'pointer';
+    map.getCanvas().style.cursor = hasDatos(p) ? 'pointer' : '';
     let label;
-    if (searchName) {
+    if (searchName && hasDatos(p)) {
       const rankH = [1,2,3,4,5].find(i => p[`top_h_${i}`] === searchName);
       const rankM = [1,2,3,4,5].find(i => p[`top_m_${i}`] === searchName);
       const best  = rankH && rankM ? Math.min(rankH, rankM) : (rankH ?? rankM);
@@ -386,8 +386,7 @@ map.on('load', async () => {
         ? `${p.municipio} — ${toTitleCase(searchName)} (nº${best})`
         : `${p.municipio} — no en top 5`;
     } else {
-      const nombre = toTitleCase(p[`top_${currentSex}`]);
-      label = `${p.municipio} — ${nombre}`;
+      label = p.municipio;
     }
     tooltip.textContent = label;
     tooltip.style.left = (e.originalEvent.clientX + 14) + 'px';
